@@ -209,45 +209,33 @@ document.addEventListener('DOMContentLoaded', function() {
         heroText.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8)); // Fade out effect
     });
 
-    // --- Lightbox/Image Pop-up ---
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightboxModal = document.getElementById('lightbox-modal');
-    const lightboxContent = document.querySelector('.lightbox-content');
-    const lightboxCaption = document.querySelector('.lightbox-caption');
-    const closeBtn = document.querySelector('.close-btn');
+   // --- Lightbox/Image Pop-up ---
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightboxModal = document.getElementById('lightbox-modal');
+const lightboxContent = document.querySelector('.lightbox-content');
+const lightboxCaption = document.querySelector('.lightbox-caption');
+const closeBtn = document.querySelector('.close-btn');
 
+// Lightbox functionality
+
+
+    // Open lightbox when gallery item is clicked
     galleryItems.forEach(item => {
         item.addEventListener('click', function() {
-            const imgSrc = this.querySelector('img').src;
-            const imgAlt = this.querySelector('img').alt;
-            const imgCaption = this.querySelector('img').dataset.caption || ''; // Get caption from data-caption
-
-            lightboxContent.src = imgSrc;
-            lightboxContent.alt = imgAlt;
-            
-            // Set caption text and trigger animation
-            lightboxCaption.textContent = imgCaption;
-            // A slight delay to ensure text content is rendered before animation starts
-            setTimeout(() => {
-                lightboxCaption.classList.add('animate-caption');
-            }, 10); // Small delay, e.g., 10ms
-
+            const img = this.querySelector('img');
+            lightboxContent.src = img.src;
+            lightboxContent.alt = img.alt;
+            lightboxCaption.textContent = img.getAttribute('data-caption') || '';
             lightboxModal.classList.add('active');
-            document.body.classList.add('no-scroll'); // Prevent background scrolling
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
         });
     });
 
-    // Function to close the lightbox and reset caption animation
-    function closeLightbox() {
-        lightboxModal.classList.remove('active');
-        document.body.classList.remove('no-scroll');
-        // Remove animation class and clear text content on close
-        lightboxCaption.classList.remove('animate-caption');
-        lightboxCaption.textContent = ''; // Clear text to reset for next image
-    }
-
     // Close lightbox when close button is clicked
-    closeBtn.addEventListener('click', closeLightbox);
+    closeBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Prevent event bubbling
+        closeLightbox();
+    });
 
     // Close lightbox when clicking outside the image
     lightboxModal.addEventListener('click', function(e) {
@@ -262,4 +250,17 @@ document.addEventListener('DOMContentLoaded', function() {
             closeLightbox();
         }
     });
+
+    function closeLightbox() {
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = ''; // Re-enable scrolling
+    }
 });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "Escape" && lightboxModal.classList.contains('active')) {
+            closeLightbox();
+        }
+    });
+
