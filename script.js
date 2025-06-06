@@ -203,6 +203,25 @@ const closeBtn = document.querySelector('.close-btn');
         });
     });
 
+// Add zoom functionality
+const lightboxImg = document.querySelector('.lightbox-content');
+lightboxImg.addEventListener('click', function() {
+    this.classList.toggle('zoomed');
+});
+
+// Close lightbox when clicking outside image
+document.querySelector('.lightbox-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closeLightbox();
+    }
+});
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox-modal');
+    lightbox.classList.remove('active');
+    lightboxImg.classList.remove('zoomed');
+}
+
     // Close lightbox when close button is clicked
     closeBtn.addEventListener('click', function(e) {
         e.stopPropagation(); // Prevent event bubbling
@@ -235,4 +254,31 @@ const closeBtn = document.querySelector('.close-btn');
             closeLightbox();
         }
     });
+    // Add this to your existing JavaScript
+document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', function() {
+        const imgSrc = this.querySelector('img').src;
+        const caption = this.querySelector('img').getAttribute('data-caption');
+        
+        const lightbox = document.getElementById('lightbox-modal');
+        const lightboxImg = lightbox.querySelector('.lightbox-content');
+        const lightboxCaption = lightbox.querySelector('.lightbox-caption');
+        
+        lightboxImg.src = imgSrc;
+        lightboxCaption.textContent = caption;
+        lightbox.classList.add('active');
+        
+        // Add animation class to caption after a short delay
+        setTimeout(() => {
+            lightboxCaption.classList.add('animate-caption');
+        }, 300);
+    });
+});
+
+// Close lightbox
+document.querySelector('.close-btn').addEventListener('click', function() {
+    const lightbox = document.getElementById('lightbox-modal');
+    lightbox.classList.remove('active');
+    lightbox.querySelector('.lightbox-caption').classList.remove('animate-caption');
+});
 
