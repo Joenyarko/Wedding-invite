@@ -132,82 +132,54 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Hero Section Carousel ---
-    const slides = document.querySelectorAll('.carousel-slide');
-    let currentSlide = 0;
-    const slideInterval = 5000; // 5 seconds
+// --- Countdown Timer ---
+// Set the date we're counting down to (August 02, 2025, 11:00 AM GMT)
+const countDownDate = new Date("Aug 2, 2025 11:00:00 GMT+0000").getTime();
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.transform = `translateX(-${index * 100}%)`;
-        });
-    }
+// Update the count down every 1 second
+const x = setInterval(function() {
+    // Get today's date and time
+    const now = new Date().getTime();
 
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
+    // Find the distance between now and the count down date
+    const distance = countDownDate - now;
 
-    // Start auto-sliding
-    let carouselTimer = setInterval(nextSlide, slideInterval);
+    // Time calculations for days, hours, minutes and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Pause on hover (optional)
-    const heroCarousel = document.querySelector('.hero-carousel');
-    heroCarousel.addEventListener('mouseenter', () => clearInterval(carouselTimer));
-    heroCarousel.addEventListener('mouseleave', () => carouselTimer = setInterval(nextSlide, slideInterval));
+    // Display the result
+    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
 
-
-    // --- Countdown Timer ---
-    // Set the date we're counting down to (August 02, 2025, 11:00 AM GMT)
-    const countDownDate = new Date("Aug 2, 2025 11:00:00 GMT+0000").getTime(); // Adjust timezone if necessary
-
-    // Update the count down every 1 second
-    const x = setInterval(function() {
-
-        // Get today's date and time
-        const now = new Date().getTime();
-
-        // Find the distance between now and the count down date
-        const distance = countDownDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Display the result in the respective elements
-        document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-        document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-        document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-        document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-
-        // If the count down is finished, write some text
-        if (distance < 0) {
-            clearInterval(x);
-            document.getElementById("days").innerHTML = "00";
-            document.getElementById("hours").innerHTML = "00";
-            document.getElementById("minutes").innerHTML = "00";
-            document.getElementById("seconds").innerHTML = "00";
-            // You can replace the countdown timer with a "We're Married!" message
-            const countdownTimerDiv = document.querySelector('.countdown-timer');
-            if (countdownTimerDiv) {
-                countdownTimerDiv.innerHTML = '<p class="married-message">We are married!</p>';
-                countdownTimerDiv.style.fontSize = '2rem';
-                countdownTimerDiv.style.padding = '20px';
-                countdownTimerDiv.style.backgroundColor = 'rgba(139,90,43,0.8)';
-            }
+    // If the count down is finished
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("days").innerHTML = "00";
+        document.getElementById("hours").innerHTML = "00";
+        document.getElementById("minutes").innerHTML = "00";
+        document.getElementById("seconds").innerHTML = "00";
+        const countdownTimerDiv = document.querySelector('.countdown-timer');
+        if (countdownTimerDiv) {
+            countdownTimerDiv.innerHTML = '<p class="married-message">We are married!</p>';
+            countdownTimerDiv.style.fontSize = '2rem';
+            countdownTimerDiv.style.padding = '20px';
+            countdownTimerDiv.style.backgroundColor = 'rgba(139,90,43,0.8)';
         }
-    }, 1000);
+    }
+}, 1000);
 
-    // Adjust hero text position on scroll for better visibility (optional)
-    window.addEventListener('scroll', function() {
-        const heroText = document.querySelector('.hero-text');
-        const scrollY = window.scrollY;
-        // Adjust the translateY value as needed
-        heroText.style.transform = `translateY(${scrollY * 0.2}px)`; // Parallax effect
-        heroText.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8)); // Fade out effect
-    });
+// Optional scroll effect (keep if you want it)
+window.addEventListener('scroll', function() {
+    const heroText = document.querySelector('.hero-text');
+    const scrollY = window.scrollY;
+    heroText.style.transform = `translateY(${scrollY * 0.2}px)`;
+    heroText.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
+});
 
    // --- Lightbox/Image Pop-up ---
 const galleryItems = document.querySelectorAll('.gallery-item');
