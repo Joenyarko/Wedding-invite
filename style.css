@@ -953,7 +953,7 @@ footer p {
         justify-content: center;
     }
     .logo {
-        margin-bottom: 15px; /* Space below logo when stacked */
+        margin-bottom: 10px; /* Space below logo when stacked */
         font-size: 2rem;
     }
     .nav-links {
@@ -1009,7 +1009,7 @@ footer p {
     }
       .hero-text {
         position: absolute;
-        top:55%; /* Adjusted from 50% - Try 55% or 60% */
+        top:60%; /* Adjusted from 50% - Try 55% or 60% */
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
@@ -1098,6 +1098,21 @@ footer p {
         opacity: 1;
         transform: translateY(0);
     }
+    .rsvp-section {
+    position: relative; /* Needed for absolute positioning of overlay/background */
+    padding: 100px 0; /* More padding for a grander look */
+    min-height: 60vh; /* Ensure it takes up enough vertical space */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center;
+    color: var(--white); /* Text color over background */
+    background: url('ring1.jpg') center/cover no-repeat fixed; /* Parallax effect */
+    border-radius: 20px; /* Consistent with other sections */
+    box-shadow: 0 5px 20px var(--shadow-light); /* Consistent with other sections */
+    margin: 30px auto 150px auto; /* Consistent with other sections */
+    max-width: 1000px; /* Keep content aligned with other sections */
+}
 }
 
 @media (max-width: 768px) {
@@ -1145,7 +1160,7 @@ footer p {
         min-height: 450px; /* Example minimum height */
     }
     .hero-text {
-        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        top: 60%; /* Keep consistent or fine-tune for this breakpoint */
         /* ... other styles ... */
     }
     
@@ -1265,7 +1280,7 @@ footer p {
 @media (max-width: 576px) {
     /* Adjustments for typical phone screens */
     .navbar {
-        padding: 10px 0;
+        padding: 5px 0;
     }
     .navbar .container{
         width: 100%;
@@ -1280,7 +1295,7 @@ footer p {
         min-height: 400px; /* Example minimum height */
     }
     .hero-text {
-        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        top: 60%; /* Keep consistent or fine-tune for this breakpoint */
         /* ... other styles ... */
     }
     
@@ -1430,17 +1445,33 @@ footer p {
         font-size: 1rem;
         padding: 0 10px;
     }
+    .rsvp-section {
+    position: relative; /* Needed for absolute positioning of overlay/background */
+    padding: 100px 0; /* More padding for a grander look */
+    min-height: 60vh; /* Ensure it takes up enough vertical space */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center;
+    color: var(--white); /* Text color over background */
+    background: url('ring1.jpg') center/cover no-repeat fixed; /* Parallax effect */
+    border-radius: 20px; /* Consistent with other sections */
+    box-shadow: 0 5px 20px var(--shadow-light); /* Consistent with other sections */
+    margin: 30px auto 150px auto; /* Consistent with other sections */
+    max-width: 1000px; /* Keep content aligned with other sections */
+}
 }
 @media (max-width: 480px) {
     .logo {
-        font-size: 1.6rem; /* Slightly smaller logo */
+        font-size: 1.6rem; 
+        margin-bottom: 5px;/* Slightly smaller logo */
     }
     .hero-section {
         height: 45vh; /* Reduce height for tablets */
         min-height: 350px; /* Example minimum height */
     }
      .hero-text {
-        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        top: 60%; /* Keep consistent or fine-tune for this breakpoint */
         /* ... other styles ... */
     }
     .hero-text h1 {
