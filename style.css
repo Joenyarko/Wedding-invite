@@ -1009,7 +1009,7 @@ footer p {
     }
       .hero-text {
         position: absolute;
-        top: 55%; /* Adjusted from 50% - Try 55% or 60% */
+        top:60%; /* Adjusted from 50% - Try 55% or 60% */
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
@@ -1073,7 +1073,7 @@ footer p {
 
     .qa-item h3, .qa-item p {
         padding-left: 0; /* Remove padding for smaller screens */
-        text-align: center;
+        text-align: justify;
     }
     .qa-item h3::before {
         position: static;
