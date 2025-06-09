@@ -953,7 +953,7 @@ footer p {
         justify-content: center;
     }
     .logo {
-        margin-bottom: 10px; /* Space below logo when stacked */
+        margin-bottom: 8px; /* Space below logo when stacked */
         font-size: 2rem;
     }
     .nav-links {
@@ -1005,7 +1005,8 @@ footer p {
     }
     .hero {
         height: 70vh; /* Reduce height for tablets */
-        min-height: 500px; /* Example minimum height */
+        min-height: 500px;
+        margin-bottom: 50px; /* Example minimum height */
     }
       .hero-text {
         position: absolute;
@@ -1157,7 +1158,8 @@ footer p {
     }
     .hero {
         height: 60vh; /* Reduce height for tablets */
-        min-height: 450px; /* Example minimum height */
+        min-height: 450px;
+         margin-bottom: 50px; /* Example minimum height */
     }
     .hero-text {
         top: 60%; /* Keep consistent or fine-tune for this breakpoint */
@@ -1280,7 +1282,7 @@ footer p {
 @media (max-width: 576px) {
     /* Adjustments for typical phone screens */
     .navbar {
-        padding: 5px 0;
+        padding: 3px 0;
     }
     .navbar .container{
         width: 100%;
@@ -1292,7 +1294,8 @@ footer p {
     }
     .hero {
         height: 50vh; /* Reduce height for tablets */
-        min-height: 400px; /* Example minimum height */
+        min-height: 400px;
+         margin-bottom: 45px; /* Example minimum height */
     }
     .hero-text {
         top: 60%; /* Keep consistent or fine-tune for this breakpoint */
@@ -1464,11 +1467,12 @@ footer p {
 @media (max-width: 480px) {
     .logo {
         font-size: 1.6rem; 
-        margin-bottom: 5px;/* Slightly smaller logo */
+        margin-bottom: 3px;/* Slightly smaller logo */
     }
-    .hero-section {
+    .hero {
         height: 45vh; /* Reduce height for tablets */
-        min-height: 350px; /* Example minimum height */
+        min-height: 350px;
+         margin-bottom: 40px; /* Example minimum height */
     }
      .hero-text {
         top: 60%; /* Keep consistent or fine-tune for this breakpoint */
