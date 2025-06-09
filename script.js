@@ -1,284 +1,298 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', function() {
-        this.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        // Prevent body scrolling when mobile menu is open
-        document.body.classList.toggle('no-scroll');
-    });
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            // Do not smooth scroll for CTA button within nav as it might have external action
-            if (this.classList.contains('cta')) {
-                // If it's an external link or a complex CTA, let it behave normally or add specific handler
-                const href = this.getAttribute('href');
-                if (href && !href.startsWith('#')) { // Check if it's an external link
-                    window.open(href, '_blank'); // Open in new tab
-                } else if (href === '#rsvp') {
-                    // Smooth scroll to RSVP section if it's the CTA
-                    const targetElement = document.querySelector(this.getAttribute('href'));
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80, // Adjust for fixed header height
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-                return; // Exit if it's the CTA
-            }
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80, // Adjust for fixed header height
-                    behavior: 'smooth'
-                });
-            }
-
-            // Close mobile menu if open after click
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-        });
-    });
-
-    // RSVP Form submission (using placeholder Formspree)
-    const rsvpForm = document.getElementById('rsvp-form');
-    if (rsvpForm) {
-        rsvpForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            const form = e.target;
-            const formData = new FormData(form);
-
-            try {
-                // Show a loading SweetAlert
-                Swal.fire({
-                    title: 'Sending RSVP...',
-                    text: 'Please wait a moment.',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                // IMPORTANT: Replace with your actual Formspree endpoint
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'RSVP Submitted!',
-                        text: 'Thank you for your RSVP! We look forward to celebrating with you.',
-                        confirmButtonText: 'Great!',
-                        customClass: {
-                            confirmButton: 'swal-button-primary'
-                        }
-                    });
-                    form.reset();
-                } else {
-                    const data = await response.json();
-                    let errorMessage = 'Failed to submit RSVP. Please try again.';
-                    if (data.errors) {
-                        errorMessage += '\nDetails: ' + data.errors.map(err => err.message).join(', ');
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Submission Failed',
-                        text: errorMessage,
-                        confirmButtonText: 'OK',
-                        customClass: {
-                            confirmButton: 'swal-button-error'
-                        }
-                    });
-                }
-            } catch (error) {
-                console.error('Error submitting RSVP:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Network Error',
-                    text: 'An unexpected error occurred. Please check your internet connection and try again.',
-                    confirmButtonText: 'OK',
-                    customClass: {
-                        confirmButton: 'swal-button-error'
-                    }
-                });
-            }
-        });
-    }
-
-    // Sticky navigation on scroll
+document.addEventListener('DOMContentLoaded', () => {
+    // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) { // Adjust threshold as needed
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
     });
 
-// --- Countdown Timer ---
-// Set the date we're counting down to (August 02, 2025, 11:00 AM GMT)
-const countDownDate = new Date("Aug 2, 2025 11:00:00 GMT+0000").getTime();
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('.nav-links a, .logo').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
 
-// Update the count down every 1 second
-const x = setInterval(function() {
-    // Get today's date and time
-    const now = new Date().getTime();
-
-    // Find the distance between now and the count down date
-    const distance = countDownDate - now;
-
-    // Time calculations for days, hours, minutes and seconds
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Display the result
-    document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
-    document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
-
-    // If the count down is finished
-    if (distance < 0) {
-        clearInterval(x);
-        document.getElementById("days").innerHTML = "00";
-        document.getElementById("hours").innerHTML = "00";
-        document.getElementById("minutes").innerHTML = "00";
-        document.getElementById("seconds").innerHTML = "00";
-        const countdownTimerDiv = document.querySelector('.countdown-timer');
-        if (countdownTimerDiv) {
-            countdownTimerDiv.innerHTML = '<p class="married-message">We are married!</p>';
-            countdownTimerDiv.style.fontSize = '2rem';
-            countdownTimerDiv.style.padding = '20px';
-            countdownTimerDiv.style.backgroundColor = 'rgba(139,90,43,0.8)';
-        }
-    }
-}, 1000);
-
-// Optional scroll effect (keep if you want it)
-window.addEventListener('scroll', function() {
-    const heroText = document.querySelector('.hero-text');
-    const scrollY = window.scrollY;
-    heroText.style.transform = `translateY(${scrollY * 0.2}px)`;
-    heroText.style.opacity = 1 - (scrollY / (window.innerHeight * 0.8));
-});
-
-   // --- Lightbox/Image Pop-up ---
-const galleryItems = document.querySelectorAll('.gallery-item');
-const lightboxModal = document.getElementById('lightbox-modal');
-const lightboxContent = document.querySelector('.lightbox-content');
-const lightboxCaption = document.querySelector('.lightbox-caption');
-const closeBtn = document.querySelector('.close-btn');
-
-// Lightbox functionality
-
-
-    // Open lightbox when gallery item is clicked
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            lightboxContent.src = img.src;
-            lightboxContent.alt = img.alt;
-            lightboxCaption.textContent = img.getAttribute('data-caption') || '';
-            lightboxModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            if (targetElement) {
+                const offset = navbar.offsetHeight; // Get dynamic navbar height
+                window.scrollTo({
+                    top: targetElement.offsetTop - offset,
+                    behavior: 'smooth'
+                });
+            }
+            // Close mobile menu after clicking a link
+            if (window.innerWidth <= 992) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.classList.remove('no-scroll');
+            }
         });
     });
 
-// Add zoom functionality
-const lightboxImg = document.querySelector('.lightbox-content');
-lightboxImg.addEventListener('click', function() {
-    this.classList.toggle('zoomed');
-});
+    // Mobile Navigation (Hamburger Menu)
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const body = document.body;
 
-// Close lightbox when clicking outside image
-document.querySelector('.lightbox-modal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeLightbox();
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        body.classList.toggle('no-scroll'); // Toggle body scroll
+    });
+
+    // Countdown Timer Logic
+    const countdownDate = new Date('Oct 26, 2025 16:00:00').getTime(); // October 26, 2024, 4:00 PM
+
+    const updateCountdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = countdownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Update HTML elements
+        if (document.getElementById('days')) {
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+        }
+        if (document.getElementById('hours')) {
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        }
+        if (document.getElementById('minutes')) {
+            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        }
+        if (document.getElementById('seconds')) {
+            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        }
+
+
+        if (distance < 0) {
+            clearInterval(updateCountdown);
+            if (document.getElementById('countdown')) {
+                document.getElementById('countdown').innerHTML = "<h2>THE DAY IS HERE!</h2>";
+            }
+        }
+    }, 1000);
+
+    // Moments Section Carousel
+   // In your script.js file, inside document.addEventListener('DOMContentLoaded', () => { ... });
+
+    // Moments Section Carousel
+    const carouselContainer = document.querySelector('.carousel-container'); // Get reference to the container
+    const carouselTrack = document.querySelector('.carousel-track');
+    const galleryItems = Array.from(document.querySelectorAll('.carousel-track .gallery-item'));
+    const prevButton = document.querySelector('.carousel-button.prev');
+    const nextButton = document.querySelector('.carousel-button.next');
+    let currentIndex = 0;
+    let itemWidth = 0; // Initialize to 0
+
+    // Function to adjust carousel height based on the current image's aspect ratio
+    const adjustCarouselHeight = (imageElement) => {
+        if (!imageElement || !carouselContainer) return;
+
+        // Ensure the image has loaded to get its natural dimensions
+        // If image is already loaded, naturalWidth/Height are immediately available.
+        // Otherwise, use a temporary Image object to load it without disrupting display
+        if (imageElement.complete && imageElement.naturalWidth) {
+            applyCalculatedHeight(imageElement);
+        } else {
+            const tempImg = new Image();
+            tempImg.onload = () => {
+                applyCalculatedHeight(tempImg);
+            };
+            tempImg.onerror = () => {
+                console.error("Failed to load image for height calculation:", imageElement.src);
+                // Fallback: set a default or minimum height if image fails to load
+                if (carouselContainer) {
+                    carouselContainer.style.height = '300px'; // Fallback height
+                }
+            };
+            tempImg.src = imageElement.src;
+        }
+    };
+
+    const applyCalculatedHeight = (img) => {
+        if (!img.naturalWidth || !img.naturalHeight) {
+            console.warn("Could not get natural dimensions for image:", img.src);
+            return;
+        }
+
+        // Get the actual displayed width of one carousel item
+        const currentItemDisplayedWidth = galleryItems[0].offsetWidth;
+
+        // Calculate the required height to display the full image based on its aspect ratio
+        const calculatedHeight = currentItemDisplayedWidth * (img.naturalHeight / img.naturalWidth);
+
+        // Add padding-bottom from gallery-item to the calculated height to account for animated text
+        const galleryItemPaddingBottom = parseFloat(getComputedStyle(galleryItems[0]).paddingBottom);
+        const finalCarouselHeight = calculatedHeight + galleryItemPaddingBottom;
+
+
+        // Apply the height to the carousel container for smooth transition
+        if (carouselContainer) {
+            carouselContainer.style.height = `${finalCarouselHeight}px`;
+        }
+    };
+
+    const updateCarousel = () => {
+        if (galleryItems.length === 0) return;
+
+        itemWidth = galleryItems[0].offsetWidth;
+        carouselTrack.style.transform = `translateX(${-currentIndex * itemWidth}px)`;
+
+        const currentImageElement = galleryItems[currentIndex].querySelector('img');
+        adjustCarouselHeight(currentImageElement); // Adjust height for the current slide
+    };
+
+    const nextSlide = () => {
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        updateCarousel();
+    };
+
+    const prevSlide = () => {
+        currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateCarousel();
+    };
+
+    const autoSlideInterval = 5000; // 5 seconds
+    let slideInterval;
+
+    // Auto slide functionality
+    const startAutoSlide = () => {
+        stopAutoSlide(); // Clear any existing interval first
+        slideInterval = setInterval(nextSlide, autoSlideInterval);
+    };
+
+    const stopAutoSlide = () => {
+        clearInterval(slideInterval);
+    };
+
+    // Event listeners for manual navigation
+    if (nextButton) {
+        nextButton.addEventListener('click', () => {
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            nextSlide();
+            startAutoSlide(); // Restart auto-slide after interaction
+        });
     }
-});
 
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox-modal');
-    lightbox.classList.remove('active');
-    lightboxImg.classList.remove('zoomed');
-}
-
-    // Close lightbox when close button is clicked
-    closeBtn.addEventListener('click', function(e) {
-        e.stopPropagation(); // Prevent event bubbling
-        closeLightbox();
-    });
-
-    // Close lightbox when clicking outside the image
-    lightboxModal.addEventListener('click', function(e) {
-        if (e.target === lightboxModal) {
-            closeLightbox();
-        }
-    });
-
-    // Close lightbox with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape" && lightboxModal.classList.contains('active')) {
-            closeLightbox();
-        }
-    });
-
-    function closeLightbox() {
-        lightboxModal.classList.remove('active');
-        document.body.style.overflow = ''; // Re-enable scrolling
+    if (prevButton) {
+        prevButton.addEventListener('click', () => {
+            stopAutoSlide(); // Stop auto-slide on manual interaction
+            prevSlide();
+            startAutoSlide(); // Restart auto-slide after interaction
+        });
     }
-});
 
-    // Close lightbox with Escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === "Escape" && lightboxModal.classList.contains('active')) {
-            closeLightbox();
+    // Recalculate widths and adjust height on window resize
+    window.addEventListener('resize', () => {
+        // Temporarily disable transitions during resize for smoother adjustment
+        carouselTrack.style.transition = 'none';
+        if (carouselContainer) {
+            carouselContainer.style.transition = 'none';
         }
-    });
-    // Add this to your existing JavaScript
-document.querySelectorAll('.gallery-item').forEach(item => {
-    item.addEventListener('click', function() {
-        const imgSrc = this.querySelector('img').src;
-        const caption = this.querySelector('img').getAttribute('data-caption');
-        
-        const lightbox = document.getElementById('lightbox-modal');
-        const lightboxImg = lightbox.querySelector('.lightbox-content');
-        const lightboxCaption = lightbox.querySelector('.lightbox-caption');
-        
-        lightboxImg.src = imgSrc;
-        lightboxCaption.textContent = caption;
-        lightbox.classList.add('active');
-        
-        // Add animation class to caption after a short delay
+
+        currentIndex = 0; // Reset to first slide or adjust to maintain current view if complex
+
+        // Re-calculate all widths and heights immediately after resize
+        updateCarousel();
+
+        // Re-enable transitions after a slight delay to allow layout to settle
         setTimeout(() => {
-            lightboxCaption.classList.add('animate-caption');
-        }, 300);
+            carouselTrack.style.transition = 'transform 0.5s ease-in-out';
+            if (carouselContainer) {
+                carouselContainer.style.transition = 'height 0.5s ease-in-out';
+            }
+        }, 50);
+
+        stopAutoSlide();
+        startAutoSlide();
     });
-});
 
-// Close lightbox
-document.querySelector('.close-btn').addEventListener('click', function() {
-    const lightbox = document.getElementById('lightbox-modal');
-    lightbox.classList.remove('active');
-    lightbox.querySelector('.lightbox-caption').classList.remove('animate-caption');
-});
+    // Initial carousel setup and auto-slide start
+    updateCarousel(); // Call once to set initial position and height
+    startAutoSlide();
 
+
+    // Lightbox Functionality (no changes needed here, keeping for completeness)
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxCaption = document.getElementById('lightboxCaption');
+    const closeBtn = document.querySelector('.close-btn');
+
+    // Ensure lightbox is hidden on page load
+    if (lightboxModal) {
+        lightboxModal.style.display = 'none';
+    }
+
+    document.querySelectorAll('.gallery-item img').forEach(item => {
+        item.addEventListener('click', event => {
+            console.log("Image clicked! Opening lightbox."); // Debugging
+            if (lightboxModal) {
+                lightboxModal.classList.add('active');
+                lightboxModal.style.display = 'flex'; // Ensure display is flex when active
+            }
+            if (lightboxImage) {
+                lightboxImage.src = item.src;
+                lightboxImage.alt = item.alt;
+            }
+            if (lightboxCaption) {
+                lightboxCaption.textContent = item.nextElementSibling ? item.nextElementSibling.textContent : item.alt; // Get text from animated-text or alt
+            }
+            document.body.classList.add('no-scroll'); // Prevent scrolling
+        });
+    });
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            console.log("Close button clicked! Closing lightbox."); // Debugging
+            if (lightboxModal) {
+                lightboxModal.classList.remove('active');
+                lightboxModal.style.display = 'none'; // Explicitly hide
+            }
+            if (lightboxImage) {
+                lightboxImage.classList.remove('zoomed'); // Remove zoom if applied
+            }
+            document.body.classList.remove('no-scroll'); // Re-enable scrolling
+        });
+    }
+
+    if (lightboxModal) {
+        lightboxModal.addEventListener('click', (e) => {
+            // Debugging: Check where the click occurred
+            console.log("Lightbox overlay clicked. Target:", e.target);
+            // Close modal if clicked directly on the overlay, not on the image or caption
+            if (e.target === lightboxModal) {
+                console.log("Click was on the overlay, closing lightbox."); // Debugging
+                lightboxModal.classList.remove('active');
+                lightboxModal.style.display = 'none'; // Explicitly hide
+                lightboxImage.classList.remove('zoomed');
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    }
+
+    if (lightboxImage) {
+        lightboxImage.addEventListener('click', () => {
+            lightboxImage.classList.toggle('zoomed');
+        });
+    }
+
+    // Keyboard navigation for lightbox (Escape key to close)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal && lightboxModal.classList.contains('active')) {
+            console.log("Escape key pressed. Closing lightbox."); // Debugging
+            lightboxModal.classList.remove('active');
+            lightboxModal.style.display = 'none'; // Explicitly hide
+            if (lightboxImage) {
+                lightboxImage.classList.remove('zoomed');
+            }
+            document.body.classList.remove('no-scroll');
+        }
+    });
+
+});
