@@ -1009,7 +1009,7 @@ footer p {
     }
       .hero-text {
         position: absolute;
-        top:60%; /* Adjusted from 50% - Try 55% or 60% */
+        top:55%; /* Adjusted from 50% - Try 55% or 60% */
         left: 50%;
         transform: translate(-50%, -50%);
         width: 90%;
@@ -1144,6 +1144,11 @@ footer p {
         height: 60vh; /* Reduce height for tablets */
         min-height: 450px; /* Example minimum height */
     }
+    .hero-text {
+        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        /* ... other styles ... */
+    }
+    
     .hero-text h1 {
         font-size: 3rem; /* Re-adjusted */
     }
@@ -1209,6 +1214,10 @@ footer p {
         padding: 10px 20px;
         font-size: 1rem;
     }
+     .qa-item h3, .qa-item p {
+        padding-left: 0; /* Remove padding for smaller screens */
+        text-align: justify;
+    }
     .qa-item {
         padding: 20px;
     }
@@ -1270,6 +1279,11 @@ footer p {
         height: 50vh; /* Reduce height for tablets */
         min-height: 400px; /* Example minimum height */
     }
+    .hero-text {
+        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        /* ... other styles ... */
+    }
+    
     .hero-text h1 {
         font-size: 2.2rem;
         letter-spacing: 1px;
@@ -1353,6 +1367,10 @@ footer p {
         padding: 8px 18px;
         font-size: 0.9rem;
     }
+     .qa-item h3, .qa-item p {
+        padding-left: 0; /* Remove padding for smaller screens */
+        text-align: justify;
+    }
     .qa-item {
         padding: 15px;
     }
@@ -1421,6 +1439,10 @@ footer p {
         height: 45vh; /* Reduce height for tablets */
         min-height: 350px; /* Example minimum height */
     }
+     .hero-text {
+        top: 55%; /* Keep consistent or fine-tune for this breakpoint */
+        /* ... other styles ... */
+    }
     .hero-text h1 {
         font-size: 2.8rem; /* Corrected to larger size */
         letter-spacing: 0.5px;
@@ -1487,6 +1509,10 @@ footer p {
     .map-btn {
         padding: 7px 15px;
         font-size: 0.85rem;
+    }
+     .qa-item h3, .qa-item p {
+        padding-left: 0; /* Remove padding for smaller screens */
+        text-align: justify;
     }
     .qa-item {
         padding: 12px;
