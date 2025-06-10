@@ -945,6 +945,168 @@ footer p {
     transform: translateY(-3px);
 }
 
+/* Event Program Section */
+.program-section {
+    background-color: var(--background-light); /* Consistent with other sections */
+}
+
+.program-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px; /* Space between the program blocks */
+    margin-top: 50px;
+}
+
+.program-block {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--shadow-light);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-block:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-medium);
+}
+
+.program-subtitle {
+    font-size: 1.8rem;
+    color: var(--secondary);
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.program-subtitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px; /* Shorter underline for subtitles */
+    height: 2px;
+    background-color: var(--primary);
+    border-radius: 1px;
+}
+
+.program-list,
+.photography-list {
+    list-style: none; /* Remove default bullet points */
+    padding: 0;
+    
+}
+
+.program-list li,
+.photography-list li {
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    margin-bottom: 12px; /* Space between list items */
+    line-height: 1.6;
+    display: flex; /* For aligning icon/time with text */
+    align-items: flex-start;
+}
+
+.program-list li:last-child,
+.photography-list li:last-child {
+    margin-bottom: 0;
+}
+
+.program-time {
+    font-weight: 600;
+    color: var(--primary); /* Highlight the time */
+    margin-right: 8px;
+    flex-shrink: 0; /* Prevent time from shrinking */
+}
+
+.program-text {
+    font-weight: 500; /* Slightly bolder for clarity */
+    color: var(--text-dark);
+}
+
+/* Custom Bullet points for program-list (Order of Service & Reception Program) */
+.program-list {
+    list-style: none; /* Remove default bullet */
+    padding: 0;
+}
+
+.program-list li {
+    position: relative;
+    padding-left: 25px; /* Space for the custom bullet */
+    margin-bottom: 12px;
+    font-size: 1.05rem;
+    line-height: 1.6; /* Ensure good line spacing */
+}
+
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    font-weight: 700; /* Make it bold */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
+ /*Keyframes for the pumping animation */
+@keyframes pump {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.18); /* Slightly larger for the 'pump' effect */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+.program-list li:hover::before {
+    transform: scale(1.2); /* Slight scale on hover for animation */
+}
+
+/* Specific styling for photography list numbers */
+.photography-list {
+    list-style: none; /* Keep numbers for this list */
+    padding: 0;
+}
+
+.photography-list li {
+    position: relative;
+    padding-left: 25px; /* Space for the custom bullet */
+    font-size: 1.05rem;
+    color: var(--text-dark);
+    margin-bottom: 12px; /* Space between list items */
+    line-height: 1.6;
+}
+
+.photography-list li:last-child {
+    margin-bottom: 0;
+}
+
+.photography-list li::marker {
+    color: var(--primary); /* Style the numbers with your accent color */
+    font-weight: 600;
+    font-family: var(--font-body); /* Ensure font consistency */
+}
+.photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.1rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -1678,5 +1840,36 @@ footer p {
     }
     .rsvp-verse {
         font-size: 1rem;
+    }
+}
+
+
+/* Responsive Adjustments for Program Section */
+@media (max-width: 768px) {
+    .program-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 25px;
+    }
+
+    .program-block {
+        padding: 25px;
+    }
+
+    .program-subtitle {
+        font-size: 1.6rem;
+    }
+
+    .program-list li,
+    .photography-list li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .program-block {
+        padding: 20px;
+    }
+    .program-subtitle {
+        font-size: 1.4rem;
     }
 }
