@@ -1276,6 +1276,30 @@ footer p {
     margin: 30px auto 150px auto; /* Consistent with other sections */
     max-width: 1000px; /* Keep content aligned with other sections */
 }
+
+.photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
+
 }
 
 @media (max-width: 768px) {
@@ -1439,6 +1463,28 @@ footer p {
     .rsvp-contact {
         font-size: 1rem;
     }
+    .photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
 }
 
 @media (max-width: 576px) {
@@ -1625,6 +1671,28 @@ footer p {
     margin: 30px auto 150px auto; /* Consistent with other sections */
     max-width: 1000px; /* Keep content aligned with other sections */
 }
+.photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
 }
 @media (max-width: 480px) {
     .logo {
@@ -1780,6 +1848,28 @@ footer p {
         font-size: 0.9rem;
         padding: 5px;
     }
+    .photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
 }
 
 /* Smallest mobile phones (e.g., iPhone 5/SE) */
@@ -1841,6 +1931,28 @@ footer p {
     .rsvp-verse {
         font-size: 1rem;
     }
+    .photography-list li::before {
+    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
+    color: var(--primary); /* Accent color for the heart */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the heart */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center; /* Ensures the pumping scales from the center */
+    animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
+}
+.program-list li::before {
+    content: '\2764'; /* Unicode for a small solid circle bullet */
+    font-family: 'Arial', sans-serif; /* Using your body font */
+    color: var(--primary); /* Accent color for the bullet */
+    position: absolute;
+    left: 0;
+    font-size: 1.0rem; /* Size of the bullet */
+    top: 0; /* Align to the top of the line */
+    transform-origin: center center;
+    animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
+}
 }
 
 
