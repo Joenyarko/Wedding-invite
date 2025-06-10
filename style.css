@@ -1283,7 +1283,7 @@ footer p {
     }
 
 .photography-list li::before {
-    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
     color: var(--primary); /* Accent color for the heart */
     position: absolute;
@@ -1294,7 +1294,7 @@ footer p {
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
 .program-list li::before {
-    content: '\2764'; /* Unicode for a small solid circle bullet */
+    content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
     color: var(--primary); /* Accent color for the bullet */
     position: absolute;
@@ -1469,7 +1469,7 @@ footer p {
         font-size: 1rem;
     }
     .photography-list li::before {
-    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
     color: var(--primary)!important; /* Accent color for the heart */
     position: absolute;
@@ -1480,7 +1480,7 @@ footer p {
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
 .program-list li::before {
-    content: '\2764'; /* Unicode for a small solid circle bullet */
+    content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
     color: var(--primary)!important; /* Accent color for the bullet */
     position: absolute;
@@ -1677,7 +1677,7 @@ footer p {
     max-width: 1000px; /* Keep content aligned with other sections */
 }
 .photography-list li::before {
-    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
     color: var(--primary)!important; /* Accent color for the heart */
     position: absolute;
@@ -1688,7 +1688,7 @@ footer p {
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
 .program-list li::before {
-    content: '\2764'; /* Unicode for a small solid circle bullet */
+    content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
     color: var(--primary)!important; /* Accent color for the bullet */
     position: absolute;
@@ -1854,7 +1854,7 @@ footer p {
         padding: 5px;
     }
     .photography-list li::before {
-    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
     color: var(--primary)!important; /* Accent color for the heart */
     position: absolute;
@@ -1865,7 +1865,7 @@ footer p {
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
 .program-list li::before {
-    content: '\2764'; /* Unicode for a small solid circle bullet */
+    content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
     color: var(--primary)!important; /* Accent color for the bullet */
     position: absolute;
@@ -1937,7 +1937,7 @@ footer p {
         font-size: 1rem;
     }
     .photography-list li::before {
-    content: '\2764'; /* Unicode for a solid heart ❤️ */
+    content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
     color: var(--primary)!important; /* Accent color for the heart */
     position: absolute;
@@ -1948,7 +1948,7 @@ footer p {
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
 .program-list li::before {
-    content: '\2764'; /* Unicode for a small solid circle bullet */
+    content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
     color: var(--primary)!important; /* Accent color for the bullet */
     position: absolute;
