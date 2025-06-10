@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Countdown Timer Logic
-    const countdownDate = new Date('Oct 26, 2025 16:00:00').getTime(); // October 26, 2024, 4:00 PM
+    const countdownDate = new Date('Aug 02, 2025 11:00:00').getTime(); // October 26, 2024, 4:00 PM
 
     const updateCountdown = setInterval(() => {
         const now = new Date().getTime();
