@@ -1105,7 +1105,45 @@ footer p {
     transform-origin: center center; /* Ensures the pumping scales from the center */
     animation: pump 1.8s infinite alternate ease-in-out; /* Apply pumping animation */
 }
+/* In your style.css */
 
+.custom-swal-popup {
+    background-color: var(--background-light) !important; /* Use your theme's light background */
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+}
+
+.custom-swal-title {
+    color: var(--secondary) !important; /* Use your theme's accent color */
+    font-family: var(--font-heading) !important; /* Use your heading font */
+    font-size: 2em !important;
+    padding-bottom: 10px !important;
+    border-bottom: 2px solid var(--primary) !important; /* Add a divider */
+    margin-bottom: 20px !important;
+}
+
+.custom-swal-html-container {
+    color: var(--text-dark) !important; /* Use your theme's body text color */
+    font-family: var(--font-body) !important;
+    font-size: 1.1em !important;
+    line-height: 1.5 !important;
+    padding: 0 15px !important;
+}
+
+.custom-swal-confirm-button {
+    background-color: var(--primary) !important; /* Your primary button color */
+    color: var(--white) !important; /* White text on button */
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    padding: 10px 30px !important;
+    font-size: 1.1em !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.custom-swal-confirm-button:hover {
+    background-color: var(--secondary) !important; /* Hover effect */
+}
 
 
 /* Responsive Design */
