@@ -295,4 +295,76 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Song Lyrics Modal Functionality
+    const songLyrics = {
+        '131': {
+            title: 'Song 131: What God Has Yoked Together',
+            lyrics: `1.With dignity and joy,
+A threefold cord is bound.
+With God and men to witness,
+These sacred vows resound.
+
+(CHORUS 1)
+He vowed before Jehovah
+To love her from the heart.
+“What God has yoked together,
+Let no man put apart.”
+
+2.They both have searched God’s Word
+To learn to do his will,
+And now they seek his blessing,
+Their promise to fulfill.
+
+(CHORUS 2)
+She vowed before Jehovah
+To love him from the heart.
+“What God has yoked together,
+Let no man put apart.”`
+        },
+        '132': {
+            title: 'Song 132: Now we are one',
+            lyrics: `1.This is at last bone of my bone,
+Flesh of my flesh; now I’m not alone.
+God has provided a partner,
+Someone to call my own.
+Now we are one; now there can be
+Blessings to share for you and for me.
+As man and woman together,
+We are a family.
+Ev’ry day we’ll serve our God above.
+As he shows the way,
+Unfailing love we’ll display.
+As we have vowed, so may it be.
+Seasons of joy, may we come to see.
+Oh, may we honor Jehovah,
+And may you always be my love.`
+        }
+    };
+
+    const modal = document.getElementById('songLyricsModal');
+    const songTitle = document.getElementById('songTitle');
+    const songLyricsText = document.getElementById('songLyrics');
+    const closeModal = document.querySelector('.close-modal');
+
+    document.querySelectorAll('.song-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const songNum = this.getAttribute('data-song');
+            if (songLyrics[songNum]) {
+                songTitle.textContent = songLyrics[songNum].title;
+                songLyricsText.textContent = songLyrics[songNum].lyrics;
+                modal.classList.add('show'); // Use class to show modal
+            }
+        });
+    });
+
+    closeModal.addEventListener('click', function() {
+        modal.classList.remove('show');
+    });
+
+    window.addEventListener('click', function(event) {
+        if (event.target == modal) {
+            modal.classList.remove('show');
+        }
+    });
 });

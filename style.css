@@ -1426,16 +1426,15 @@ footer p {
     .section-title {
         font-size: 2.2rem;
     }
-    .section {
-        padding: 60px 0;
-        margin: 20px auto;
-    }
     .section-description {
         font-size: 1rem;
-        margin-bottom: 30px;
+    }
+    .couple-profile {
+        flex-direction: column;
+        gap: 30px;
     }
     .profile-card {
-        max-width: 300px;
+        max-width: 80%; /* Adjust width on smaller screens */
     }
     .img-wrapper {
         width: 180px;
@@ -1447,69 +1446,73 @@ footer p {
     .profile-bio {
         font-size: 0.95rem;
     }
-    .story-main-text {
-        font-size: 1rem;
+    .venue-details-wrapper {
+        flex-direction: column;
+        gap: 30px;
     }
-    .venue-info h3 {
-        font-size: 2rem;
+    .venue-image {
+        width: 100%; /* Image takes full width */
     }
-    .venue-info p {
-        font-size: 1.05rem;
+    .venue-info {
+        text-align: center; /* Center text when stacked */
+        max-width: 100%;
     }
     .map-btn {
-        padding: 10px 20px;
-        font-size: 1rem;
+        width: auto; /* Auto width */
     }
-     .qa-item h3, .qa-item p {
+
+    .qa-item h3, .qa-item p {
         padding-left: 0; /* Remove padding for smaller screens */
         text-align: justify;
     }
-    .qa-item {
-        padding: 20px;
-    }
-    .qa-item h3 {
-        font-size: 1.2rem;
-    }
-    .qa-item p {
-        font-size: 0.95rem;
-    }
-    .gifts-section .section-description, .gift-info {
-        font-size: 1rem;
-    }
-    .gift-info strong {
-        font-size: 1.1rem;
+    .qa-item h3::before {
+        position: static;
+        transform: none;
+        margin-right: 10px;
     }
     .carousel-container {
-        max-width: 100%;
-        max-height: 400px; 
-        /* Carousel takes full width on smaller screens */
+        max-width: 700px;
+        max-height: 420px;
+        
+         /* Adjust max-width for carousel on tablets */
     }
+    
     .animated-text {
         font-size: 1.2rem;
-        font-style: italic;
-        padding: 8px 12px;
         bottom: 20px;
+        opacity: 0.9; /* Slightly visible by default on mobile */
+        transform: translateY(50%);
     }
-    .carousel-button {
-        padding: 8px 12px;
-        font-size: 1.5rem;
+
+    .gallery-item:hover .animated-text {
+        opacity: 1;
+        transform: translateY(0);
     }
     .rsvp-section {
-        padding: 80px 0;
-    }
-    .rsvp-verse {
-        font-size: 1.3rem;
-    }
-    .rsvp-closing {
-        font-size: 1.1rem;
-    }
-    .rsvp-contact {
-        font-size: 1rem;
-    }
+    position: relative; /* Needed for absolute positioning of overlay/background */
+    padding: 100px 0; /* More padding for a grander look */
+    min-height: 60vh; /* Ensure it takes up enough vertical space */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    text-align: center;
+    color: var(--white); /* Text color over background */
+    background: url('ring1.jpg') center/cover no-repeat fixed; /* Parallax effect */
+    border-radius: 20px; /* Consistent with other sections */
+    box-shadow: 0 5px 20px var(--shadow-light); /* Consistent with other sections */
+    margin: 30px auto 150px auto; /* Consistent with other sections */
+    max-width: 1000px; /* Keep content aligned with other sections */
+}
+
+ .program-list li::before,
     .photography-list li::before {
+        color: var(--primary) !important; /* Add !important here */
+    }
+
+.photography-list li::before {
     content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
-    color: var(--primary)!important; /* Accent color for the heart */
+    color: var(--primary); /* Accent color for the heart */
     position: absolute;
     left: 0;
     font-size: 1.0rem; /* Size of the heart */
@@ -1520,7 +1523,7 @@ footer p {
 .program-list li::before {
     content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
-    color: var(--primary)!important; /* Accent color for the bullet */
+    color: var(--primary); /* Accent color for the bullet */
     position: absolute;
     left: 0;
     font-size: 1.0rem; /* Size of the bullet */
@@ -1528,6 +1531,7 @@ footer p {
     transform-origin: center center;
     animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
 }
+
 }
 
 @media (max-width: 576px) {
@@ -1582,25 +1586,11 @@ footer p {
         font-size: 0.7rem;
         margin-top: 2px;
     }
-    .hero-date-location {
-        font-size: 0.9rem;
-        margin-top: 15px;
-    }
-    .section {
-        padding: 40px 0;
-        margin: 20px auto;
-    }
     .section-title {
-        font-size: 1.8rem;
-        margin-bottom: 25px;
-    }
-    .section-title::after {
-        width: 60px;
+        font-size: 2.2rem;
     }
     .section-description {
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-        padding: 0 10px; /* Add horizontal padding for readability */
+        font-size: 1rem;
     }
     .couple-profile {
         gap: 30px;
@@ -1611,7 +1601,6 @@ footer p {
     .img-wrapper {
         width: 150px;
         height: 150px;
-        margin-bottom: 15px;
     }
     .profile-card h3 {
         font-size: 1.3rem;
@@ -1619,85 +1608,47 @@ footer p {
     .profile-bio {
         font-size: 0.85rem;
     }
-    .love-icon {
-        font-size: 2.5rem;
+    .venue-details-wrapper {
+        flex-direction: column;
+        gap: 30px;
     }
-    .story-main-text {
-        font-size: 0.9rem;
-        padding: 0 15px; /* Add horizontal padding for readability */
+    .venue-image {
+        width: 100%; /* Image takes full width */
     }
-    .venue-info h3 {
-        font-size: 1.6rem;
-    }
-    .venue-info p {
-        font-size: 0.95rem;
+    .venue-info {
+        text-align: center; /* Center text when stacked */
+        max-width: 100%;
     }
     .map-btn {
-        padding: 8px 18px;
-        font-size: 0.9rem;
+        width: auto; /* Auto width */
     }
-     .qa-item h3, .qa-item p {
+
+    .qa-item h3, .qa-item p {
         padding-left: 0; /* Remove padding for smaller screens */
         text-align: justify;
     }
-    .qa-item {
-        padding: 15px;
-    }
-    .qa-item h3 {
-        font-size: 1rem;
-    }
-    .qa-item p {
-        font-size: 0.85rem;
-    }
-    .gift-info {
-        font-size: 0.9rem;
-    }
-    .gift-info strong {
-        font-size: 1rem;
+    .qa-item h3::before {
+        position: static;
+        transform: none;
+        margin-right: 10px;
     }
     .carousel-container {
-        max-width: 100%;
-        max-height: 400px; 
-        /* Carousel takes full width on smaller screens */
+        max-width: 700px;
+        max-height: 420px;
+        
+         /* Adjust max-width for carousel on tablets */
     }
     
     .animated-text {
-        font-size: 1rem;
-        font-style:italic;
-        bottom: 20px;
-    }
-    .rsvp-section {
-        padding: 60px 0;
-    }
-    .rsvp-verse {
-        font-size: 1.1rem;
-    }
-    .rsvp-verse span {
-        font-size: 0.8rem;
-    }
-    .rsvp-closing {
-        font-size: 1rem;
-    }
-    .rsvp-contact {
-        font-size: 0.9rem;
-    }
-    footer {
-        padding: 20px 0;
-    }
-    .social-links a {
         font-size: 1.2rem;
+        bottom: 20px;
+        opacity: 0.9; /* Slightly visible by default on mobile */
+        transform: translateY(50%);
     }
-    .lightbox-modal {
-        padding-top: 30px;
-    }
-    .close-btn {
-        font-size: 30px;
-        top: 10px;
-        right: 20px;
-    }
-    .lightbox-caption {
-        font-size: 1rem;
-        padding: 0 10px;
+
+    .gallery-item:hover .animated-text {
+        opacity: 1;
+        transform: translateY(0);
     }
     .rsvp-section {
     position: relative; /* Needed for absolute positioning of overlay/background */
@@ -1714,10 +1665,16 @@ footer p {
     margin: 30px auto 150px auto; /* Consistent with other sections */
     max-width: 1000px; /* Keep content aligned with other sections */
 }
+
+ .program-list li::before,
+    .photography-list li::before {
+        color: var(--primary) !important; /* Add !important here */
+    }
+
 .photography-list li::before {
     content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
-    color: var(--primary)!important; /* Accent color for the heart */
+    color: var(--primary); /* Accent color for the heart */
     position: absolute;
     left: 0;
     font-size: 1.0rem; /* Size of the heart */
@@ -1728,7 +1685,7 @@ footer p {
 .program-list li::before {
     content: '\279F'; /* Unicode for a small solid circle bullet */
     font-family: 'Arial', sans-serif; /* Using your body font */
-    color: var(--primary)!important; /* Accent color for the bullet */
+    color: var(--primary); /* Accent color for the bullet */
     position: absolute;
     left: 0;
     font-size: 1.0rem; /* Size of the bullet */
@@ -1736,7 +1693,9 @@ footer p {
     transform-origin: center center;
     animation: pump 1.8s infinite alternate ease-in-out; /* Animation for hover */
 }
+
 }
+
 @media (max-width: 480px) {
     .logo {
         font-size: 1.6rem; 
@@ -1837,15 +1796,12 @@ footer p {
     .gift-info strong {
         font-size: 0.9rem;
     }
-    .gallery-grid { /* This rule was for grid, now it's carousel */
-        grid-template-columns: 1fr;
-    }
     .carousel-container {
         max-width: 100%;
         max-height: 400px; 
         /* Carousel takes full width on smaller screens */
     }
-
+    
     .animated-text {
         font-size: 0.9rem;
         bottom: 20px;
@@ -1866,31 +1822,18 @@ footer p {
     .rsvp-verse {
         font-size: 0.95rem;
     }
-    .rsvp-verse span {
-        font-size: 0.75rem;
-    }
     .rsvp-closing {
         font-size: 0.9rem;
     }
     .rsvp-contact {
         font-size: 0.85rem;
     }
-    footer {
-        padding: 15px 0;
-    }
-    .social-links a {
-        font-size: 1rem;
-        margin: 0 8px;
-    }
-    .close-btn {
-        font-size: 25px;
-        top: 5px;
-        right: 10px;
-    }
-    .lightbox-caption {
-        font-size: 0.9rem;
-        padding: 5px;
-    }
+    #songLyrics {
+  font-size: 1.18rem;
+  color: var(--text-dark);
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
     .photography-list li::before {
     content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
@@ -1915,7 +1858,6 @@ footer p {
 }
 }
 
-/* Smallest mobile phones (e.g., iPhone 5/SE) */
 @media (max-width: 375px) {
     .hero-text h1 {
         font-size: 1.8rem;
@@ -1974,6 +1916,12 @@ footer p {
     .rsvp-verse {
         font-size: 1rem;
     }
+    #songLyrics {
+  font-size: 1.18rem;
+  color: var(--text-dark);
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
     .photography-list li::before {
     content: '\279F'; /* Unicode for a solid heart ❤️ */
     font-family: 'Arial', sans-serif; /* Using a font that renders emojis well */
@@ -2027,4 +1975,37 @@ footer p {
     .program-subtitle {
         font-size: 1.4rem;
     }
+}
+
+/* Modal Styles for Song Lyrics - Fix default display */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90vw;
+  max-height: 80vh;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  position: relative;
+  text-align: left;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
 }
