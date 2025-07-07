@@ -367,4 +367,39 @@ And may you always be my love.`
             modal.classList.remove('show');
         }
     });
+
+    // --- LOVE BUBBLE FLOATING HEARTS ---
+    function createLoveBubble() {
+        const heart = document.createElement('i');
+        heart.className = 'fas fa-heart love-bubble';
+        // Random horizontal position (10% to 90% of viewport width)
+        heart.style.left = Math.random() * 80 + 10 + 'vw';
+        // Random size (16px to 36px)
+        const size = Math.random() * 20 + 16;
+        heart.style.fontSize = size + 'px';
+        // Random color (red/pink shades)
+        const colors = ['#e25555', '#ff69b4', '#ff6f91', '#ffb6b9', '#f67280'];
+        heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+        // Random animation duration (3s to 6s)
+        const duration = Math.random() * 3 + 3;
+        heart.style.animationDuration = duration + 's';
+        // Random opacity
+        heart.style.opacity = Math.random() * 0.5 + 0.5;
+
+        heart.style.position = 'fixed';
+        heart.style.bottom = '-40px';
+        heart.style.zIndex = 9999;
+        heart.style.pointerEvents = 'none';
+        heart.style.transition = 'opacity 0.5s';
+
+        document.body.appendChild(heart);
+
+        // Remove heart after animation
+        heart.addEventListener('animationend', () => {
+            heart.remove();
+        });
+    }
+
+    // Create bubbles at intervals
+    setInterval(createLoveBubble, 800); // every 0.8s
 });
