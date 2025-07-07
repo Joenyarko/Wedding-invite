@@ -2310,3 +2310,13 @@ footer p {
   margin: 18px 0 0 0;
   color: var(--text-dark);
 }
+
+/* Hide .animated-text by default in the gallery. Only show the caption in the lightbox modal. */
+.gallery-item .animated-text {
+  display: none;
+}
+
+/* Show animated-text in the lightbox modal only */
+#lightboxModal .lightbox-caption {
+  display: block;
+}
