@@ -44,40 +44,75 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Countdown Timer Logic
-    const countdownDate = new Date('Aug 02, 2025 11:00:00').getTime(); // October 26, 2024, 4:00 PM
+   // --- Confetti Animation and Countdown Logic ---
+const weddingDate = new Date("August 02, 2025 00:00:00");
+const confettiDurationInSeconds = 2;
+const localStorageKey = 'weddingConfettiShown';
 
-    const updateCountdown = setInterval(() => {
-        const now = new Date().getTime();
-        const distance = countdownDate - now;
+// Confetti Function (unchanged)
+function launchConfetti() {
+  const duration = confettiDurationInSeconds * 1000;
+  const end = Date.now() + duration;
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  (function frame() {
+    confetti({
+      particleCount: 200,
+      startVelocity: 30,
+      spread: 360,
+      origin: {
+        x: Math.random(),
+        y: Math.random() - 0.2
+      }
+    });
 
-        // Update HTML elements
-        if (document.getElementById('days')) {
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-        }
-        if (document.getElementById('hours')) {
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-        }
-        if (document.getElementById('minutes')) {
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-        }
-        if (document.getElementById('seconds')) {
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-        }
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
+  }());
+}
 
+// Main Countdown and Confetti Logic (modified)
+const countdownDate = weddingDate.getTime();
+const updateCountdown = setInterval(() => {
+  const now = new Date().getTime();
+  const distance = countdownDate - now;
 
-        if (distance < 0) {
-            clearInterval(updateCountdown);
-            if (document.getElementById('countdown')) {
-                document.getElementById('countdown').innerHTML = "<h2>THE DAY IS HERE!</h2>";
-            }
-        }
-    }, 1000);
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+  // Update HTML elements
+  if (document.getElementById('days')) {
+    document.getElementById('days').innerText = String(days).padStart(2, '0');
+  }
+  if (document.getElementById('hours')) {
+    document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+  }
+  if (document.getElementById('minutes')) {
+    document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+  }
+  if (document.getElementById('seconds')) {
+    document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+  }
+
+  // Check if the time is up
+  if (distance < 0) {
+    clearInterval(updateCountdown);
+
+    const confettiShownTime = localStorage.getItem(localStorageKey);
+    const nowTime = now;
+
+    if (!confettiShownTime || (nowTime - confettiShownTime) > (confettiDurationInSeconds * 1000)) {
+        launchConfetti();
+        localStorage.setItem(localStorageKey, nowTime);
+    }
+
+    if (document.getElementById('countdown')) {
+        document.getElementById('countdown').innerHTML = "<h1>Happy Wedding Day!</h1>";
+    }
+  }
+}, 1000);
     // Moments Section Carousel
    // In your script.js file, inside document.addEventListener('DOMContentLoaded', () => { ... });
 
@@ -402,4 +437,5 @@ And may you always be my love.`
 
     // Create bubbles at intervals
     setInterval(createLoveBubble, 800); // every 0.8s
+
 });
