@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // --- Confetti Animation and Countdown Logic ---
 const weddingDate = new Date("August 02, 2025 00:00:00").getTime();
-const weddingEndDate = new Date("August 03, 2025 22:00:00").getTime();
+const weddingEndDate = new Date("August 03, 2025 00:00:00").getTime();
 const confettiDurationInSeconds = 3; 
 const localStorageKey = 'weddingConfettiShown';
 const countdownContainer = document.getElementById('countdown');
@@ -432,4 +432,5 @@ And may you always be my love.`
     setInterval(createLoveBubble, 800); // every 0.8s
 
 });
+
 
