@@ -44,75 +44,68 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Countdown Timer Logic
-   // --- Confetti Animation and Countdown Logic ---
-const weddingDate = new Date("August 02, 2025 00:00:00");
-const confettiDurationInSeconds = 2;
+
+// --- Confetti Animation and Countdown Logic ---
+const weddingDate = new Date("August 02, 2025 00:00:00").getTime();
+const weddingEndDate = new Date("August 03, 2025 22:00:00").getTime();
+const confettiDurationInSeconds = 3; 
 const localStorageKey = 'weddingConfettiShown';
+const countdownContainer = document.getElementById('countdown');
 
-// Confetti Function (unchanged)
+// Confetti Function (single burst)
 function launchConfetti() {
-  const duration = confettiDurationInSeconds * 1000;
-  const end = Date.now() + duration;
-
-  (function frame() {
     confetti({
-      particleCount: 200,
-      startVelocity: 30,
-      spread: 360,
-      origin: {
-        x: Math.random(),
-        y: Math.random() - 0.2
-      }
+        particleCount: 300,
+        spread: 360,
+        startVelocity: 50,
+        origin: { y: 0.6 }
     });
 
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  }());
+    // Clear particles after 2s
+    setTimeout(() => confetti.reset(), 2000);
 }
 
-// Main Countdown and Confetti Logic (modified)
-const countdownDate = weddingDate.getTime();
+// Main Countdown and Confetti Logic
 const updateCountdown = setInterval(() => {
-  const now = new Date().getTime();
-  const distance = countdownDate - now;
+    const now = new Date().getTime();
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // After the wedding day
+    if (now >= weddingEndDate) {
+        clearInterval(updateCountdown);
+        if (countdownContainer) {
+            countdownContainer.innerHTML = "<h1>Thank you for celebrating with us!</h1>";
+        }
 
-  // Update HTML elements
-  if (document.getElementById('days')) {
-    document.getElementById('days').innerText = String(days).padStart(2, '0');
-  }
-  if (document.getElementById('hours')) {
-    document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-  }
-  if (document.getElementById('minutes')) {
-    document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-  }
-  if (document.getElementById('seconds')) {
-    document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
-  }
+    // It's the Wedding Day
+    } else if (now >= weddingDate && now < weddingEndDate) {
+        const confettiShownTime = localStorage.getItem(localStorageKey);
+        const nowTime = now;
 
-  // Check if the time is up
-  if (distance < 0) {
-    clearInterval(updateCountdown);
+        if (!confettiShownTime || (nowTime - confettiShownTime) > (confettiDurationInSeconds * 1000)) {
+            launchConfetti();
+            localStorage.setItem(localStorageKey, nowTime);
+        }
 
-    const confettiShownTime = localStorage.getItem(localStorageKey);
-    const nowTime = now;
+        if (countdownContainer) {
+            countdownContainer.innerHTML = "<h1>Our Forever Starts Today!</h1>";
+        }
 
-    if (!confettiShownTime || (nowTime - confettiShownTime) > (confettiDurationInSeconds * 1000)) {
-        launchConfetti();
-        localStorage.setItem(localStorageKey, nowTime);
+    // Before wedding (countdown)
+    } else {
+        const distance = weddingDate - now;
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (document.getElementById('days')) document.getElementById('days').innerText = String(days).padStart(2, '0');
+        if (document.getElementById('hours')) document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+        if (document.getElementById('minutes')) document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+        if (document.getElementById('seconds')) document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
     }
-
-    if (document.getElementById('countdown')) {
-        document.getElementById('countdown').innerHTML = "<h1>Happy Wedding Day!</h1>";
-    }
-  }
 }, 1000);
+
+
     // Moments Section Carousel
    // In your script.js file, inside document.addEventListener('DOMContentLoaded', () => { ... });
 
@@ -439,3 +432,4 @@ And may you always be my love.`
     setInterval(createLoveBubble, 800); // every 0.8s
 
 });
+
